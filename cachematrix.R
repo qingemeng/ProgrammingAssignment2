@@ -57,6 +57,13 @@ cacheSolve <- function(x, ...) {
     # Calculate matrix inverse if it's not cached
     # and cache the matrix inverse, then return
     data <- x$get()
+    
+    # Error check, if det(data) == 0, inverse is invalid
+    # Return error message
+    if (det(data) == 0)
+    {
+        return(message("Invalid matrix inverse, det value is 0!"))
+    }    
     inverse <- solve(data)
     x$setInverse(inverse)
     return(inverse)
